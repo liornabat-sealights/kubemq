@@ -15,7 +15,7 @@ tasks:
       - golangci-lint run --disable gocritic --enable misspell --disable gosec
   default:
     cmds:
-      - go build -o "{{.BINARY_NAME}}.exe" -ldflags "-X 'main.version={{.VERSION}}'"
+      - go build -o "{{.BINARY_NAME}}.exe" ./cmd/main/main.go  -ldflags "-X 'main.version={{.VERSION}}'"
       - kubemq.exe server
   goreleaser:
     env:
