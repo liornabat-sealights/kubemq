@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubemq-route
+  namespace: kubemq
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/`) && Headers("application", "grpc")
+      services:
+        - name: kubemq
+          port: 50000
+          scheme: h2c
